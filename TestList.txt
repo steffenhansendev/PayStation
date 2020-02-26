@@ -19,12 +19,10 @@
 [x] cancelling empties the set of coins for current transaction
 [x] buy empties the set of coins for current transaction
 [x] compositional design for parking time calculation
-
 [x] 150 cents yields 60 minutes parking time (1st hour of progressive rate)
 [x] 350 cents yields 120 minutes parking time (2nd hour of progressive rate)
 [x] 650 cents yields 180 minutes parking time (3rd hour of progressive rate)
 [x] 655 cents yields 182 minutes of parking time (after 3rd hour of progressive rate)
-
 [x] compositional design for coin validation
 [x] 1 DKK is valid
 [x] 2 DKK is valid
@@ -35,22 +33,17 @@
 [x] 25 DKK is invalid
 [x] integration of CoinStrategies and PayStation
 [x] integration of RateStrategies and PayStation
-
 [x] 1 krone yields 7 minutes parking time
 [x] 3 kroner yields 21 minutes parking time
-
 [x] 1 krone yields 6 minutes parking time
 [x] 20 kroner yields 120 minutes parking time
 [x] 21 kroner yields 125 minutes parking time
-
 [x] initializeCoins maps all valid kroner to 0
 [x] universally moving coins from transactionCoins to earnedCoins updates both maps accordingly
 [x] universally calculating parking time by accumulating a transaction coin total
-
 [x] initializeCoins maps all valid cents to 0
 [x] refactor 'dollar' to 'cents'
 [x] initializeCoins in TestingCoinStrategy
 [x] refactor all uses of HashMap to LinkedHashMap
-
 [x] 500 cents yields 200 minutes on weekday
 [x] 500 cents yields 150 minutes on weekend
