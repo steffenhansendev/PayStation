@@ -13,7 +13,8 @@ import org.junit.runners.Suite;
                     TestKroneCoinStrategy.class,
                     TestCentCoinStrategy.class,
                     TestDanishLinearRateStrategy.class,
-                    TestDanishProgressiveRateStrategy.class
+                    TestDanishProgressiveRateStrategy.class,
+                    TestAlternatingRate.class
             }
     )
 
