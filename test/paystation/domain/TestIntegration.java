@@ -76,6 +76,25 @@ public class TestIntegration {
         payStation.addPayment(25);
     }
 
+    @Test
+    public void AlternatingRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
+        payStation = new PayStationImpl(new AlternatingRateStrategy(new AmericanLinearRateStrategy(), new AmericanProgressiveRateStrategy(), new FixedWeekendDetectionStrategy(false)), new CentCoinStrategy());
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        assertEquals("500 cents must yield 120 minutes parking time during weekdays", 200, payStation.readDisplay());
+        payStation = new PayStationImpl(new AlternatingRateStrategy(new AmericanLinearRateStrategy(), new AmericanProgressiveRateStrategy(), new FixedWeekendDetectionStrategy(true)), new CentCoinStrategy());
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        add100Cents();
+        assertEquals("500 cents must yield 200 minutes parking time during weekends", 150, payStation.readDisplay());
+
+    }
+
     private void add100Cents() throws IllegalCoinException {
         payStation.addPayment(25);
         payStation.addPayment(25);

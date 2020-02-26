@@ -9,10 +9,12 @@ public class AlternatingRateStrategy implements RateStrategy {
     private RateStrategy currentState = new AmericanLinearRateStrategy();
     private RateStrategy weekdayRateStrategy;
     private RateStrategy weekendRateStrategy;
+    private WeekendDetectionStrategy weekendDetectionStrategy;
 
-    public AlternatingRateStrategy(RateStrategy weekdayRateStrategy, RateStrategy weekendRateStrategy) {
+    public AlternatingRateStrategy(RateStrategy weekdayRateStrategy, RateStrategy weekendRateStrategy, WeekendDetectionStrategy weekendDetectionStrategy) {
         this.weekdayRateStrategy = weekdayRateStrategy;
         this.weekendRateStrategy = weekendRateStrategy;
+        this.weekendDetectionStrategy = weekendDetectionStrategy;
     }
 
     public int calculateTime(int totalOfTransActionCoins) {
@@ -25,10 +27,6 @@ public class AlternatingRateStrategy implements RateStrategy {
     }
 
     private boolean isWeekend() {
-        Date date = new Date();
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+        return weekendDetectionStrategy.isWeekend();
     }
 }

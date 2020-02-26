@@ -52,5 +52,5 @@
 [x] initializeCoins in TestingCoinStrategy
 [x] refactor all uses of HashMap to LinkedHashMap
 
-[x] 500 cents yields 200 minutes on monday
-[x] 500 cents yields 150 minutes on sunday
+[x] 500 cents yields 200 minutes on weekday
+[x] 500 cents yields 150 minutes on weekend
