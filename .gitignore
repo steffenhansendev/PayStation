@@ -72,3 +72,6 @@ fabric.properties
 
 # Test list
 TestList.txt
+
+# Lib directory
+lib/
