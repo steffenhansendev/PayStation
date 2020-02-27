@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 public class AlternatingRateStrategy implements RateStrategy {
 
-    private RateStrategy currentState = new AmericanLinearRateStrategy();
+    private RateStrategy currentState;
     private RateStrategy weekdayRateStrategy;
     private RateStrategy weekendRateStrategy;
     private WeekendDetectionStrategy weekendDetectionStrategy;
