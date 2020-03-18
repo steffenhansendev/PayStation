@@ -31,7 +31,7 @@ public class TestStandardReceipt {
         byteArrayOutputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(byteArrayOutputStream);
         // Get a receipt with 30 minutes wort of parking time
-        receipt = new StandardReceipt(30);
+        receipt = new ReceiptImpl(30, new NoAdditionalInfoPrinter());
         receipt.print(printStream);
         String output = byteArrayOutputStream.toString();
         // Inspect PrintStream object

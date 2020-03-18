@@ -24,7 +24,7 @@ public class TestBarCodeReceipt {
         byteArrayOutputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(byteArrayOutputStream);
         // Get a receipt with 30 minutes wort of parking time
-        receipt = new BarCodeReceipt(30);
+        receipt = new ReceiptImpl(30, new BarCodeAdditionalInfoPrinter());
         receipt.print(printStream);
         String output = byteArrayOutputStream.toString();
         // Inspect PrintStream object
