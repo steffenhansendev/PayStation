@@ -1,6 +1,11 @@
 package paystation.domain;
 
 import org.junit.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.net.PasswordAuthentication;
+
 import static org.junit.Assert.*;
 
 public class TestIntegration {
@@ -74,6 +79,45 @@ public class TestIntegration {
     public void kroneCoinStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
         payStation = new PayStationImpl(new DanishLinearFactory());
         payStation.addPayment(25);
+    }
+
+    @Test
+    public void receiptShouldIntegrateCorrectly() throws IllegalCoinException {
+        ByteArrayOutputStream byteArrayOutputStream;
+        PrintStream printStream;
+        Receipt receipt;
+        String output;
+        String[] outputAsLines;
+
+        payStation = new PayStationImpl(new TestingFactory());
+        payStation.addPayment(7);
+        receipt = payStation.buy();
+        // PrintStream object to contain indirect output
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(byteArrayOutputStream);
+        // Get a receipt with 30 minutes wort of parking time
+        receipt.print(printStream);
+        output = byteArrayOutputStream.toString();
+        // Inspect PrintStream object
+        outputAsLines = output.split("\n");
+        assertEquals("Receipt must be printed on 5 separate lines when it does not contain bar code", 5, outputAsLines.length);
+        assertEquals("007", outputAsLines[2].substring(19, 22));
+        assertFalse("Receipt must not contain '|' when it does not contain bar code", output.contains("|"));
+
+        payStation = new PayStationImpl(new TestingFactory(new BarCodeAdditionalInfoPrinter()));
+        payStation.addPayment(7);
+        receipt = payStation.buy();
+        // PrintStream object to contain indirect output
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(byteArrayOutputStream);
+        // Get a receipt with 30 minutes wort of parking time
+        receipt.print(printStream);
+        output = byteArrayOutputStream.toString();
+        // Inspect PrintStream object
+        outputAsLines = output.split("\n");
+        assertEquals("Receipt must be printed on 6 separate lines when it contains bar code", 6, outputAsLines.length);
+        assertEquals("007", outputAsLines[2].substring(19, 22));
+        assertTrue("Receipt must contain '|' when it contains bar code", output.contains("|"));
     }
 
     private void add100Cents() throws IllegalCoinException {

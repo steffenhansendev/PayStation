@@ -7,8 +7,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class TestStandardReceipt {
+public class TestReceipt {
 
     private Receipt receipt;
     private ByteArrayOutputStream byteArrayOutputStream;
@@ -21,7 +22,7 @@ public class TestStandardReceipt {
     @Test
     public void standardLayoutReceiptShouldPrintForManualAssertion() {
         System.out.println("For manual assertion of standard layout receipt: ");
-        receipt = new StandardReceipt(30);
+        receipt = new ReceiptImpl(30);
         receipt.print(System.out);
     }
 
@@ -47,5 +48,27 @@ public class TestStandardReceipt {
         Integer.parseInt(parkedAtTime.substring(0, 2));
         // Will throw exception if minute is not an integer
         Integer.parseInt(parkedAtTime.substring(3, 5));
+    }
+
+    @Test
+    public void barCodeLayoutReceiptShouldPrintForManualAssertion() {
+        System.out.println("For manual assertion of bar code layout receipt: ");
+        receipt = new ReceiptImpl(30, new BarCodeAdditionalInfoPrinter());
+        receipt.print(System.out);
+    }
+
+    @Test
+    public void barCodeLayoutReceiptShouldPrint() {
+        // PrintStream object to contain indirect output
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(byteArrayOutputStream);
+        // Get a receipt with 30 minutes wort of parking time
+        receipt = new ReceiptImpl(30, new BarCodeAdditionalInfoPrinter());
+        receipt.print(printStream);
+        String output = byteArrayOutputStream.toString();
+        // Inspect PrintStream object
+        String[] outputAsLines = output.split("\n");
+        assertEquals("Receipt must be printed on 6 separate lines", 6, outputAsLines.length);
+        assertTrue(output.contains("|"));
     }
 }

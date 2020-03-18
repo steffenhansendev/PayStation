@@ -13,6 +13,6 @@ public class AmericanLinearFactory implements PayStationFactory {
 
     @Override
     public Receipt createReceipt(int boughtParkingTime) {
-        return new StandardReceipt(boughtParkingTime);
+        return new ReceiptImpl(boughtParkingTime);
     }
 }

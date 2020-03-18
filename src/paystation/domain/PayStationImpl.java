@@ -38,7 +38,7 @@ public class PayStationImpl implements PayStation {
   }
 
   public Receipt buy() {
-    Receipt receipt = new StandardReceipt(parkingTime);
+    Receipt receipt = payStationFactory.createReceipt(parkingTime);
     for (Map.Entry<Integer, Integer> transactionCoinsEntry : transactionCoins.entrySet()) {
       int key = transactionCoinsEntry.getKey();
       int value = transactionCoinsEntry.getValue();

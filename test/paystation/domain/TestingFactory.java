@@ -1,6 +1,18 @@
 package paystation.domain;
 
+import org.junit.Test;
+
 public class TestingFactory implements PayStationFactory {
+
+    private AdditionalInfoPrinter additionalInfoPrinter;
+
+    public TestingFactory(AdditionalInfoPrinter additionalInfoPrinter) {
+        this.additionalInfoPrinter = additionalInfoPrinter;
+    }
+
+    public TestingFactory(){
+        this.additionalInfoPrinter = new NoAdditionalInfoPrinter();
+    }
 
     @Override
     public RateStrategy createRateStrategy() {
@@ -14,6 +26,6 @@ public class TestingFactory implements PayStationFactory {
 
     @Override
     public Receipt createReceipt(int boughtParkingTime) {
-        return new StandardReceipt(boughtParkingTime);
+        return new ReceiptImpl(boughtParkingTime, additionalInfoPrinter);
     }
 }
