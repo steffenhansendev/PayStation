@@ -15,7 +15,8 @@ import org.junit.runners.Suite;
                     TestDanishLinearRateStrategy.class,
                     TestDanishProgressiveRateStrategy.class,
                     TestAlternatingRate.class,
-                    TestReceipt.class
+                    TestStandardReceipt.class,
+                    TestBarCodeReceipt.class
             }
     )
 

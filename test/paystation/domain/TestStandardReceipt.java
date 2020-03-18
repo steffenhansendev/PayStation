@@ -8,7 +8,7 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestReceipt {
+public class TestStandardReceipt {
 
     private Receipt receipt;
     private ByteArrayOutputStream byteArrayOutputStream;
@@ -16,7 +16,6 @@ public class TestReceipt {
 
     @Before
     public void setUp(){
-
     }
 
     @Test

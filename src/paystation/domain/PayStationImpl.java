@@ -23,7 +23,7 @@ public class PayStationImpl implements PayStation {
     isInTransaction = false;
   }
 
-  public void addPayment( int coinValue )
+  public void addPayment(int coinValue )
           throws IllegalCoinException {
     if (!isInTransaction) {
       isInTransaction = true;
