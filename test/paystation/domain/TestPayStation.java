@@ -9,7 +9,7 @@ public class TestPayStation {
 
   @Before
   public void setup() {
-    payStation = new PayStationImpl(new TestingRateStrategy(), new TestingCoinStrategy());
+    payStation = new PayStationImpl(new TestingFactory());
   }
 
   @Test

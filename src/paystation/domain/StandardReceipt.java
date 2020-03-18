@@ -4,10 +4,10 @@ import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ReceiptImpl implements Receipt {
+public class StandardReceipt implements Receipt {
     private int boughtParkingTime;
 
-    public ReceiptImpl(int boughtParkingTime) {
+    public StandardReceipt(int boughtParkingTime) {
         this.boughtParkingTime = boughtParkingTime;
     }
 

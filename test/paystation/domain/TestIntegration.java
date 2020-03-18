@@ -8,12 +8,12 @@ public class TestIntegration {
 
     @Before
     public void setUp() {
-        payStation = new PayStationImpl(new TestingRateStrategy(), new CentCoinStrategy());
+        payStation = new PayStationImpl(new TestingFactory());
     }
 
     @Test
     public void testingRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new TestingRateStrategy(), new TestingCoinStrategy());
+        payStation = new PayStationImpl(new TestingFactory());
         payStation.addPayment(3);
         payStation.addPayment(7);
         payStation.addPayment(9);
@@ -22,7 +22,7 @@ public class TestIntegration {
 
     @Test
     public void americanLinearRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new AmericanLinearRateStrategy(), new CentCoinStrategy());
+        payStation = new PayStationImpl(new AmericanLinearFactory());
         add100Cents();   //100
         add100Cents();   //200
         add100Cents();   //300
@@ -33,7 +33,7 @@ public class TestIntegration {
 
     @Test
     public void americanProgressiveRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new AmericanProgressiveRateStrategy(), new CentCoinStrategy());
+        payStation = new PayStationImpl(new AmericanProgressiveFactory());
         add100Cents();   //100
         add100Cents();   //200
         add100Cents();   //300
@@ -44,7 +44,7 @@ public class TestIntegration {
 
     @Test
     public void danishLinearRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new DanishLinearRateStrategy(), new KroneCoinStrategy());
+        payStation = new PayStationImpl(new DanishLinearFactory());
         payStation.addPayment(20);
         payStation.addPayment(5);
         assertEquals("25 should yield 175 minutes parking time with DanishLinearRateStrategy", 175, payStation.readDisplay());
@@ -52,7 +52,7 @@ public class TestIntegration {
 
     @Test
     public void danishProgressiveRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new DanishProgressiveRateStrategy(), new KroneCoinStrategy());
+        payStation = new PayStationImpl(new DanishProgressiveFactory());
         payStation.addPayment(20);
         payStation.addPayment(5);
         assertEquals("25 should yield 145 minutes parking time with DanishProgressiveRateStrategy", 145, payStation.readDisplay());
@@ -60,39 +60,20 @@ public class TestIntegration {
 
     @Test (expected = IllegalCoinException.class)
     public void testingCoinStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new TestingRateStrategy(), new TestingCoinStrategy());
+        payStation = new PayStationImpl(new TestingFactory());
         payStation.addPayment(-1);
     }
 
     @Test (expected = IllegalCoinException.class)
     public void centCoinStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new TestingRateStrategy(), new CentCoinStrategy());
+        payStation = new PayStationImpl(new AmericanLinearFactory());
         payStation.addPayment(1);
     }
 
     @Test (expected = IllegalCoinException.class)
     public void kroneCoinStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new TestingRateStrategy(), new KroneCoinStrategy());
+        payStation = new PayStationImpl(new DanishLinearFactory());
         payStation.addPayment(25);
-    }
-
-    @Test
-    public void AlternatingRateStrategyShouldIntegrateCorrectly() throws IllegalCoinException {
-        payStation = new PayStationImpl(new AlternatingRateStrategy(new AmericanLinearRateStrategy(), new AmericanProgressiveRateStrategy(), new FixedWeekendDetectionStrategy(false)), new CentCoinStrategy());
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        assertEquals("500 cents must yield 120 minutes parking time during weekdays", 200, payStation.readDisplay());
-        payStation = new PayStationImpl(new AlternatingRateStrategy(new AmericanLinearRateStrategy(), new AmericanProgressiveRateStrategy(), new FixedWeekendDetectionStrategy(true)), new CentCoinStrategy());
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        add100Cents();
-        assertEquals("500 cents must yield 200 minutes parking time during weekends", 150, payStation.readDisplay());
-
     }
 
     private void add100Cents() throws IllegalCoinException {

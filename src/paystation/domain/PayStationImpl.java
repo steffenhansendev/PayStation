@@ -10,15 +10,17 @@ public class PayStationImpl implements PayStation {
   private boolean isInTransaction;
   private RateStrategy rateStrategy;
   private CoinStrategy coinStrategy;
+  private PayStationFactory payStationFactory;
 
-  public PayStationImpl(RateStrategy rateStrategy, CoinStrategy coinStrategy) {
+  public PayStationImpl(PayStationFactory payStationFactory) {
+    this.payStationFactory = payStationFactory;
+    this.rateStrategy = payStationFactory.createRateStrategy();
+    this.coinStrategy = payStationFactory.createCoinStrategy();
     transactionCoins = new LinkedHashMap<Integer, Integer>();
     coinStrategy.initializeCoins(transactionCoins);
     earnedCoins = new LinkedHashMap<Integer, Integer>();
     coinStrategy.initializeCoins(earnedCoins);
     isInTransaction = false;
-    this.rateStrategy = rateStrategy;
-    this.coinStrategy = coinStrategy;
   }
 
   public void addPayment( int coinValue )
@@ -36,7 +38,7 @@ public class PayStationImpl implements PayStation {
   }
 
   public Receipt buy() {
-    Receipt receipt = new ReceiptImpl(parkingTime);
+    Receipt receipt = new StandardReceipt(parkingTime);
     for (Map.Entry<Integer, Integer> transactionCoinsEntry : transactionCoins.entrySet()) {
       int key = transactionCoinsEntry.getKey();
       int value = transactionCoinsEntry.getValue();
