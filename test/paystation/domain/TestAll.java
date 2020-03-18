@@ -14,7 +14,8 @@ import org.junit.runners.Suite;
                     TestCentCoinStrategy.class,
                     TestDanishLinearRateStrategy.class,
                     TestDanishProgressiveRateStrategy.class,
-                    TestAlternatingRate.class
+                    TestAlternatingRate.class,
+                    TestReceipt.class
             }
     )
 
