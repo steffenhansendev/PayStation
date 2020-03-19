@@ -1,6 +1,10 @@
 package paystation.domain;
 
 import org.junit.*;
+import paystation.domain.coin.IllegalCoinException;
+import paystation.domain.factory.TestingFactory;
+import paystation.domain.receipt.Receipt;
+
 import static org.junit.Assert.*;
 import java.util.Map;
 

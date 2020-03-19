@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import paystation.domain.coin.IllegalCoinException;
+import paystation.domain.receipt.Receipt;
+
 import java.util.Map;
 
 public interface PayStation {
@@ -7,7 +10,7 @@ public interface PayStation {
    * Insert coin into the pay station and adjust state accordingly.
    * @param coinValue is an integer value representing the coin in
    * cent. That is, a quarter is coinValue=25, etc.
-   * @throws IllegalCoinException in case coinValue is not 
+   * @throws IllegalCoinException in case coinValue is not
    * a valid coin value
    */
   public void addPayment(int coinValue) throws IllegalCoinException;

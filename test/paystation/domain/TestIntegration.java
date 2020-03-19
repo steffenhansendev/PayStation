@@ -1,10 +1,13 @@
 package paystation.domain;
 
 import org.junit.*;
+import paystation.domain.coin.IllegalCoinException;
+import paystation.domain.factory.*;
+import paystation.domain.receipt.BarCodeAdditionalInfoPrinter;
+import paystation.domain.receipt.Receipt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.net.PasswordAuthentication;
 
 import static org.junit.Assert.*;
 
