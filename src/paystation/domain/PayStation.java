@@ -1,6 +1,7 @@
 package paystation.domain;
 
 import paystation.domain.coin.IllegalCoinException;
+import paystation.domain.factory.PayStationFactory;
 import paystation.domain.receipt.Receipt;
 
 import java.util.Map;
@@ -40,4 +41,6 @@ public interface PayStation {
    * Return the total amount of money earned by the pay station since las call and empty it, setting the earning to zero
    */
   public Map<Integer, Integer> empty() throws EmptyDuringTransactionException;
+
+  public void reconfigure(PayStationFactory payStationFactory);
 }

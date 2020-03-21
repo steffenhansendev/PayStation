@@ -73,6 +73,10 @@ public class PayStationImpl implements PayStation {
     return returnCoins;
   }
 
+  public void reconfigure(PayStationFactory payStationFactory) {
+    this.payStationFactory = payStationFactory;
+  }
+
   private void calculateParkingTime() {
     int totalOfTransActionCoins = 0;
     for (Map.Entry<Integer, Integer> transactionCoinsEntry : transactionCoins.entrySet()) {
