@@ -44,12 +44,12 @@ public class ReceiptImpl implements Receipt {
         printStream.println("--------------------------------------------------");
         printStream.println("-------   P A R K I N G   R E C E I P T    -------");
         printStream.println("                   " + boughtParkingTime + " minutes                ");
-        printStream.println("               Car parked at " + now );
+        printStream.println("               Car parked at " + now);
         additionalInfoPrinter.print(printStream);
         printStream.println("--------------------------------------------------");
     }
 
-    private String prependZeroTo(String string){
+    private String prependZeroTo(String string) {
         if (string.length() == 1) {
             string = "0" + string;
         }
