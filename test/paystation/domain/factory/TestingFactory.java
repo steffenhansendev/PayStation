@@ -4,7 +4,6 @@ import paystation.domain.coin.CoinStrategy;
 import paystation.domain.coin.TestingCoinStrategy;
 import paystation.domain.display.DisplayStrategy;
 import paystation.domain.display.ParkingTimeDisplayStrategy;
-import paystation.domain.factory.PayStationFactory;
 import paystation.domain.rate.RateStrategy;
 import paystation.domain.rate.TestingRateStrategy;
 import paystation.domain.receipt.AdditionalInfoPrinter;
