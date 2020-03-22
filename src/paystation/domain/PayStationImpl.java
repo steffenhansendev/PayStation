@@ -2,6 +2,7 @@ package paystation.domain;
 
 import paystation.domain.coin.CoinStrategy;
 import paystation.domain.coin.IllegalCoinException;
+import paystation.domain.display.DisplayStrategy;
 import paystation.domain.factory.PayStationFactory;
 import paystation.domain.rate.RateStrategy;
 import paystation.domain.receipt.Receipt;
@@ -16,12 +17,14 @@ public class PayStationImpl implements PayStation {
   private boolean isInTransaction;
   private RateStrategy rateStrategy;
   private CoinStrategy coinStrategy;
+  private DisplayStrategy displayStrategy;
   private PayStationFactory payStationFactory;
 
   public PayStationImpl(PayStationFactory payStationFactory) {
     this.payStationFactory = payStationFactory;
     this.rateStrategy = payStationFactory.createRateStrategy();
     this.coinStrategy = payStationFactory.createCoinStrategy();
+    this.displayStrategy = payStationFactory.createDisplayStrategy();
     transactionCoins = new LinkedHashMap<Integer, Integer>();
     coinStrategy.initializeCoins(transactionCoins);
     earnedCoins = new LinkedHashMap<Integer, Integer>();

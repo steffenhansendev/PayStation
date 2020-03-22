@@ -2,6 +2,8 @@ package paystation.domain.factory;
 
 import paystation.domain.coin.CoinStrategy;
 import paystation.domain.coin.TestingCoinStrategy;
+import paystation.domain.display.DisplayStrategy;
+import paystation.domain.display.ParkingTimeDisplayStrategy;
 import paystation.domain.factory.PayStationFactory;
 import paystation.domain.rate.RateStrategy;
 import paystation.domain.rate.TestingRateStrategy;
@@ -35,5 +37,10 @@ public class TestingFactory implements PayStationFactory {
     @Override
     public Receipt createReceipt(int boughtParkingTime) {
         return new ReceiptImpl(boughtParkingTime, additionalInfoPrinter);
+    }
+
+    @Override
+    public DisplayStrategy createDisplayStrategy() {
+        return new ParkingTimeDisplayStrategy();
     }
 }
