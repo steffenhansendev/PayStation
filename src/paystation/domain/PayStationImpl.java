@@ -43,7 +43,7 @@ public class PayStationImpl implements PayStation {
   }
 
   public int readDisplay() {
-    return parkingTime;
+    return displayStrategy.readDisplay(parkingTime);
   }
 
   public Receipt buy() {
