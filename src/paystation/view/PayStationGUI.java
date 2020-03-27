@@ -3,9 +3,6 @@ package paystation.view;
 import paystation.domain.PayStation;
 import paystation.domain.PayStationImpl;
 import paystation.domain.coin.IllegalCoinException;
-import paystation.domain.factory.AmericanLinearFactory;
-import paystation.domain.factory.AmericanProgressiveFactory;
-import paystation.domain.factory.PayStationFactory;
 import paystation.domain.receipt.Receipt;
 import softcollection.lcd.LCDDigitDisplay;
 
@@ -43,7 +40,6 @@ public class PayStationGUI extends JFrame {
         contentPane.add(createButtonPanel(), BorderLayout.SOUTH);
         contentPane.add(createDisplayPanel(), BorderLayout.CENTER);
         updateDisplay();
-        //setJMenuBar(createAllMenus());
         pack();
         setVisible(true);
     }
@@ -54,35 +50,25 @@ public class PayStationGUI extends JFrame {
     }
 
     private JComponent createCoinInputPanel() {
-        Box box = new Box(BoxLayout.Y_AXIS);
-        // Coupling to specific coin strategy
-        box.add(defineButton(" 5c", "5"));
-        box.add(defineButton("10 c", "10"));
-        box.add(defineButton("25 c", "25"));
-        return box;
+        JTextField textField = new JTextField(3);
+        textField.addActionListener(coinInputActionListener);
+        return textField;
     }
 
-    private ActionListener buttonActionListener = new ActionListener() {
+    private ActionListener coinInputActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent actionEvent) {
-            String string = actionEvent.getActionCommand();
-            int coin = Integer.parseInt(string);
+            String input = actionEvent.getActionCommand();
+            int coin = Integer.parseInt(input);
             try {
                 payStation.addPayment(coin);
             } catch (IllegalCoinException exception) {
-
+                exception.printStackTrace();
             }
+            JTextField textField = (JTextField) actionEvent.getSource();
+            textField.setText("");
             updateDisplay();
         }
     };
-
-    private JButton defineButton(String text, String actionCommand) {
-        JButton jButton;
-        jButton = new JButton(text);
-        jButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        jButton.setActionCommand(actionCommand);
-        jButton.addActionListener(buttonActionListener);
-        return jButton;
-    }
 
     private JComponent createButtonPanel() {
         Box box = new Box(BoxLayout.X_AXIS);
@@ -125,13 +111,11 @@ public class PayStationGUI extends JFrame {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(byteArrayOutputStream);
         receipt.print(printStream);
-        String[] lines = byteArrayOutputStream.toString().split("\n");
-        JTextArea text = new JTextArea(lines.length, 20);
+        String output = byteArrayOutputStream.toString();
+        JTextArea text = new JTextArea(5, 20);
         text.setEditable(false);
-        text.setFont(new Font("DialogInput", Font.PLAIN, 14));
-        for (int i = 0; i < lines.length; i++) {
-            text.append(lines[i]+"\n");
-        }
+        text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        text.append(output);
         jFrame.getContentPane().add(text);
         jFrame.pack();
         jFrame.setVisible(true);

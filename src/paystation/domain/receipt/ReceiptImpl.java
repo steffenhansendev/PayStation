@@ -42,7 +42,7 @@ public class ReceiptImpl implements Receipt {
         String minute = prependZeroTo(calendarNow.get(Calendar.MINUTE) + "");
         String now = hour + ":" + minute;
         printStream.println("--------------------------------------------------");
-        printStream.println("-------   P A R K I N G   R E C E I P T    -------");
+        printStream.println("-------    P A R K I N G  R E C E I P T    -------");
         printStream.println("                   " + boughtParkingTime + " minutes                ");
         printStream.println("               Car parked at " + now);
         additionalInfoPrinter.print(printStream);
