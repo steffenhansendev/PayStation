@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import paystation.domain.coin.TestCentCoinStrategy;
 import paystation.domain.coin.TestKroneCoinStrategy;
 import paystation.domain.display.TestParkingEndsAtDisplayStrategy;
+import paystation.domain.factory.TestConfigFileFactory;
 import paystation.domain.rate.*;
 import paystation.domain.receipt.TestReceipt;
 
@@ -21,7 +22,8 @@ import paystation.domain.receipt.TestReceipt;
                     TestDanishProgressiveRateStrategy.class,
                     TestAlternatingRate.class,
                     TestReceipt.class,
-                    TestParkingEndsAtDisplayStrategy.class
+                    TestParkingEndsAtDisplayStrategy.class,
+                    TestConfigFileFactory.class
             }
     )
 
