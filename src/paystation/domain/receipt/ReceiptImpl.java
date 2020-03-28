@@ -15,7 +15,7 @@ public class ReceiptImpl implements Receipt {
     }
 
     public ReceiptImpl(int boughtParkingTime) {
-        this(boughtParkingTime, new NoAdditionalInfoPrinter());
+        this(boughtParkingTime, NoAdditionalInfoPrinter.getInstance());
     }
 
     @Override

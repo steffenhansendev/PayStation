@@ -23,7 +23,7 @@ public class GUITestingFactory implements PayStationFactory {
 
     @Override
     public Receipt createReceipt(int boughtParkingTime) {
-        return new ReceiptImpl(boughtParkingTime, new BarCodeAdditionalInfoPrinter());
+        return new ReceiptImpl(boughtParkingTime, BarCodeAdditionalInfoPrinter.getInstance());
     }
 
     @Override

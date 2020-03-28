@@ -107,7 +107,7 @@ public class TestIntegration {
         assertEquals("007", outputAsLines[2].substring(19, 22));
         assertFalse("Receipt must not contain '|' when it does not contain bar code", output.contains("|"));
 
-        payStation = new PayStationImpl(new TestingFactory(new BarCodeAdditionalInfoPrinter()));
+        payStation = new PayStationImpl(new TestingFactory(BarCodeAdditionalInfoPrinter.getInstance()));
         payStation.addPayment(7);
         receipt = payStation.buy();
         // PrintStream object to contain indirect output

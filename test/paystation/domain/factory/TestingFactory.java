@@ -20,7 +20,7 @@ public class TestingFactory implements PayStationFactory {
     }
 
     public TestingFactory(){
-        this.additionalInfoPrinter = new NoAdditionalInfoPrinter();
+        this.additionalInfoPrinter = NoAdditionalInfoPrinter.getInstance();
     }
 
     @Override
