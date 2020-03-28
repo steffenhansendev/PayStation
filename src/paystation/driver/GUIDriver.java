@@ -1,7 +1,7 @@
 package paystation.driver;
 
 import paystation.domain.PayStationImpl;
-import paystation.view.GUITestingFactory;
+import paystation.domain.factory.ConfigFileFactory;
 import paystation.view.PayStationGUI;
 
 import javax.swing.*;
@@ -13,6 +13,6 @@ public class GUIDriver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new PayStationGUI(new PayStationImpl(new GUITestingFactory()));
+        new PayStationGUI(new PayStationImpl(new ConfigFileFactory()));
     }
 }
