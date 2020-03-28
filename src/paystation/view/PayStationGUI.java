@@ -15,22 +15,13 @@ import java.io.PrintStream;
 
 public class PayStationGUI extends JFrame {
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception exception) {
-            // Do nothing; the look and feel is not vital
-        }
-        new PayStationGUI();
-    }
-
     private LCDDigitDisplay lcdDigitDisplay;
 
     private PayStation payStation;
 
-    public PayStationGUI() {
+    public PayStationGUI(PayStation payStation) {
         super("PayStation GUI");
-        payStation = new PayStationImpl(new GUITestingFactory());
+        this.payStation = payStation;
         JFrame.setDefaultLookAndFeelDecorated(true);
         setLocation(100,20);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,4 +112,3 @@ public class PayStationGUI extends JFrame {
         jFrame.setVisible(true);
     }
 }
-
