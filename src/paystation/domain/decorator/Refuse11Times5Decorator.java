@@ -1,13 +1,13 @@
 package paystation.domain.decorator;
 
-import paystation.domain.PayStationImpl;
+import paystation.domain.PayStation;
 import paystation.domain.coin.IllegalCoinException;
 
 
 public class Refuse11Times5Decorator extends PayStationDecorator {
     private int numberOf5Additions;
 
-    public Refuse11Times5Decorator(PayStationImpl component) {
+    public Refuse11Times5Decorator(PayStation component) {
         super(component);
         numberOf5Additions = 0;
     }
