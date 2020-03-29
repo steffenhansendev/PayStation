@@ -42,5 +42,9 @@ public interface PayStation {
    */
   public Map<Integer, Integer> empty() throws EmptyDuringTransactionException;
 
+  /**
+   * Reconfigure the pay station to utilizing the concrete products defined in the given Concrete Factory
+   * @param payStationFactory the Concrete Factory to reconfigure the client by implementation
+   */
   public void reconfigure(PayStationFactory payStationFactory);
 }
