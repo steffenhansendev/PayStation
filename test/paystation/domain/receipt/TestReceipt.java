@@ -23,7 +23,7 @@ public class TestReceipt {
     public void setUp(){
     }
 
-    @Test
+    //@Test
     public void standardLayoutReceiptShouldPrintForManualAssertion() {
         System.out.println("For manual assertion of standard layout receipt: ");
         receipt = new ReceiptImpl(30);
@@ -54,7 +54,7 @@ public class TestReceipt {
         Integer.parseInt(parkedAtTime.substring(3, 5));
     }
 
-    @Test
+    //@Test
     public void barCodeLayoutReceiptShouldPrintForManualAssertion() {
         System.out.println("For manual assertion of bar code layout receipt: ");
         receipt = new ReceiptImpl(30, BarCodeAdditionalInfoPrinter.getInstance());

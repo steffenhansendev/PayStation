@@ -22,9 +22,7 @@ public class PayStationImpl implements PayStation {
 
   public PayStationImpl(PayStationFactory payStationFactory) {
     this.payStationFactory = payStationFactory;
-    this.rateStrategy = payStationFactory.createRateStrategy();
-    this.coinStrategy = payStationFactory.createCoinStrategy();
-    this.displayStrategy = payStationFactory.createDisplayStrategy();
+    configureFromFactory();
     transactionCoins = new LinkedHashMap<Integer, Integer>();
     coinStrategy.initializeCoins(transactionCoins);
     earnedCoins = new LinkedHashMap<Integer, Integer>();
@@ -78,6 +76,7 @@ public class PayStationImpl implements PayStation {
 
   public void reconfigure(PayStationFactory payStationFactory) {
     this.payStationFactory = payStationFactory;
+    configureFromFactory();
   }
 
   private void calculateParkingTime() {
@@ -88,5 +87,11 @@ public class PayStationImpl implements PayStation {
       totalOfTransActionCoins += key * value;
     }
     parkingTime = rateStrategy.calculateTime(totalOfTransActionCoins);
+  }
+
+  private void configureFromFactory() {
+    this.rateStrategy = payStationFactory.createRateStrategy();
+    this.coinStrategy = payStationFactory.createCoinStrategy();
+    this.displayStrategy = payStationFactory.createDisplayStrategy();
   }
 }
