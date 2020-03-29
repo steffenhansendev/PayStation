@@ -32,15 +32,9 @@ public class TestLogDecorator {
     }
 
     @Test
-    public void testTest() {
-        System.out.println(new Date().toString());
-    }
-
-    @Test
     public void adding3ShouldPrint3AndCurrentDateAndTime() throws IllegalCoinException {
         payStation.addPayment(3);
         String output = byteArrayOutputStream.toString();
-        System.out.println(output);
         Date now = new Date();
         assertTrue(output.contains("Payment of 3 was added at: "));
         assertTrue(output.contains(now.toString()));
@@ -55,7 +49,7 @@ public class TestLogDecorator {
         payStation.cancel();
         assertEquals("Display must read 0 after cancelling", 0, payStation.readDisplay());
         assertTrue("A purchase must return an instance of Receipt", payStation.buy() instanceof Receipt);
-        assertTrue("", payStation.empty().containsKey(3));
+        assertTrue("Emptying pay station must yield the coin that was added", payStation.empty().containsKey(3));
     }
 
     @Test (expected = IllegalCoinException.class)

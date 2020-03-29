@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import paystation.domain.coin.TestCentCoinStrategy;
 import paystation.domain.coin.TestKroneCoinStrategy;
 import paystation.domain.decorator.TestLogDecorator;
+import paystation.domain.decorator.TestRefuse11Times5Decorator;
 import paystation.domain.display.TestParkingEndsAtDisplayStrategy;
 import paystation.domain.factory.TestConfigFileFactory;
 import paystation.domain.rate.*;
@@ -25,7 +26,8 @@ import paystation.domain.receipt.TestReceipt;
                     TestReceipt.class,
                     TestParkingEndsAtDisplayStrategy.class,
                     TestConfigFileFactory.class,
-                    TestLogDecorator.class
+                    TestLogDecorator.class,
+                    TestRefuse11Times5Decorator.class
             }
     )
 
